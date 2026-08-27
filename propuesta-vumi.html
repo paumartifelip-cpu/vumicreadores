@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta de transformación · VUMI × Pau Martí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vumi-navy: #003B71;
+    --vumi-dark: #0A213D;
+    --vumi-blue: #4D88C5;
+    --vumi-sky: #EAF3FB;
+    --vumi-sky-border: #CFE2F5;
+    --vumi-accent: #2A6EC2;
+    --vumi-teal: #00A3C4;
+    
+    --bg-page: #FFFFFF;
+    --bg-soft: #F4F8FC;
+    --bg-card: #FFFFFF;
+    --border-card: #E1EBF5;
+    --border-light: #EBF1F7;
+    
+    --text-main: #1C2D42;
+    --text-muted: #596D85;
+    --text-light: #8497AF;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg-page);
+    color:var(--text-main);
+    font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  
+  /* ---- Container & Typography ---- */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .display{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;
+    line-height:1.15;
+    letter-spacing:-0.02em;
+    color:var(--vumi-navy);
+  }
+  
+  .eyebrow{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--vumi-blue);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:2px;
+    border-radius:2px;
+    background:var(--vumi-blue);
+  }
+  
+  .grad{
+    color:var(--vumi-accent);
+    background:linear-gradient(120deg, var(--vumi-navy) 0%, var(--vumi-accent) 60%, var(--vumi-teal) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  /* ---- Header / Nav bar ---- */
+  .site-header{
+    border-bottom:1px solid var(--border-light);
+    background:#FFFFFF;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 12px rgba(0, 59, 113, 0.03);
+  }
+  .site-header .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+  .logo-area{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .vumi-logo{
+    font-size:1.85rem;
+    font-weight:900;
+    letter-spacing:-0.03em;
+    color:var(--vumi-navy);
+    display:flex;
+    align-items:baseline;
+  }
+  .vumi-logo sup{
+    font-size:0.6rem;
+    margin-left:2px;
+    font-weight:700;
+  }
+  .collab-tag{
+    font-size:0.85rem;
+    color:var(--text-light);
+    font-weight:500;
+    border-left:1px solid var(--border-card);
+    padding-left:14px;
+  }
+  .collab-tag b{
+    color:var(--vumi-navy);
+  }
+  
+  .btn-vumi{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--vumi-blue);
+    color:#FFFFFF;
+    font-size:0.88rem;
+    font-weight:600;
+    padding:10px 24px;
+    border-radius:50px;
+    text-decoration:none;
+    transition:all 0.2s ease;
+    box-shadow:0 4px 14px rgba(77, 136, 197, 0.25);
+  }
+  .btn-vumi:hover{
+    background:var(--vumi-navy);
+    transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(0, 59, 113, 0.2);
+  }
+
+  /* ---- Section Rhythm ---- */
+  .section{
+    padding:90px 0;
+    position:relative;
+  }
+  .section.soft-bg{
+    background:var(--bg-soft);
+    border-top:1px solid var(--border-card);
+    border-bottom:1px solid var(--border-card);
+  }
+  .lede{
+    font-size:1.18rem;
+    color:var(--text-muted);
+    max-width:64ch;
+    margin-top:18px;
+    font-weight:400;
+    line-height:1.7;
+  }
+  .kicker-h{
+    font-size:clamp(1.9rem,4.5vw,2.8rem);
+    margin-top:20px;
+    max-width:24ch;
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:80px 0 70px;
+    background:linear-gradient(180deg, #FFFFFF 0%, #F5F9FD 100%);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;
+    top:-20%;
+    right:-10%;
+    width:650px;
+    height:650px;
+    background:radial-gradient(circle, rgba(77, 136, 197, 0.12) 0%, rgba(234, 243, 251, 0.05) 50%, transparent 70%);
+    filter:blur(30px);
+    pointer-events:none;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,6.2vw,4.2rem);
+    margin-top:24px;
+    color:var(--vumi-navy);
+    font-weight:800;
+  }
+  .badge{
+    display:inline-flex;
+    gap:10px;
+    align-items:center;
+    padding:7px 18px;
+    border:1px solid var(--vumi-sky-border);
+    border-radius:100px;
+    font-size:0.82rem;
+    color:var(--vumi-blue);
+    background:var(--vumi-sky);
+    font-weight:600;
+  }
+  .badge b{
+    color:var(--vumi-navy);
+  }
+
+  /* ---- EKG Signature ---- */
+  .ekg{
+    margin-top:48px;
+    position:relative;
+    background:#FFFFFF;
+    padding:26px 30px;
+    border-radius:18px;
+    border:1px solid var(--border-card);
+    box-shadow:0 8px 30px rgba(0, 59, 113, 0.04);
+  }
+  .ekg svg{
+    width:100%;
+    height:90px;
+    display:block;
+  }
+  .flat{
+    stroke:#D1DEEC;
+    stroke-width:2;
+    fill:none;
+    opacity:0.8;
+  }
+  .pulse{
+    stroke:url(#pg);
+    stroke-width:3.5;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    filter:drop-shadow(0 2px 8px rgba(77, 136, 197, 0.4));
+  }
+  .ekg-caption{
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+    font-weight:600;
+  }
+  .ekg-caption span:last-child{
+    color:var(--vumi-accent);
+    font-weight:700;
+  }
+  @media(prefers-reduced-motion:no-preference){
+    .pulse{stroke-dasharray:1600;stroke-dashoffset:1600;animation:draw 2.4s .3s cubic-bezier(.6,0,.2,1) forwards}
+    @keyframes draw{to{stroke-dashoffset:0}}
+  }
+
+  /* ---- Stat Card ---- */
+  .stat{
+    margin-top:36px;
+    border:1px solid var(--border-card);
+    border-radius:18px;
+    background:#FFFFFF;
+    padding:34px 36px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:10px 28px;
+    box-shadow:0 8px 24px rgba(0, 59, 113, 0.04);
+    border-left:5px solid var(--vumi-blue);
+  }
+  .stat .big{
+    font-weight:800;
+    font-size:clamp(2.4rem,6vw,3.6rem);
+    line-height:1;
+    color:var(--vumi-navy);
+  }
+  .stat .lbl{
+    color:var(--text-muted);
+    font-size:1.05rem;
+    max-width:32ch;
+  }
+  .stat .lbl b{
+    color:var(--vumi-navy);
+  }
+  .stat .punch{
+    flex-basis:100%;
+    margin-top:14px;
+    font-size:1.12rem;
+    color:var(--text-main);
+    font-weight:400;
+    line-height:1.6;
+    padding-top:14px;
+    border-top:1px solid var(--border-light);
+  }
+  .stat .punch b{
+    color:var(--vumi-navy);
+    font-weight:700;
+  }
+
+  /* ---- Empower Designers Highlight Card ---- */
+  .empower-card{
+    margin-top:40px;
+    border:1px solid var(--vumi-sky-border);
+    border-radius:20px;
+    background:linear-gradient(135deg, #FFFFFF 0%, var(--vumi-sky) 100%);
+    padding:36px 40px;
+    box-shadow:0 10px 30px rgba(0, 59, 113, 0.05);
+    border-left:6px solid var(--vumi-accent);
+  }
+  .empower-badge{
+    display:inline-block;
+    font-weight:800;
+    font-size:0.76rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--vumi-navy);
+    background:#FFFFFF;
+    border:1px solid var(--vumi-sky-border);
+    padding:5px 12px;
+    border-radius:50px;
+    margin-bottom:14px;
+  }
+  .empower-card h3{
+    font-size:1.5rem;
+    color:var(--vumi-navy);
+    margin-bottom:12px;
+    font-weight:800;
+  }
+  .empower-card p{
+    color:var(--text-main);
+    font-size:1.08rem;
+    line-height:1.75;
+  }
+  .empower-card p b{
+    color:var(--vumi-navy);
+  }
+
+  /* ---- Symptoms / Opportunities ---- */
+  .sympt{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+    margin-top:40px;
+  }
+  .sy{
+    border:1px solid var(--border-card);
+    border-radius:16px;
+    padding:28px 24px;
+    background:#FFFFFF;
+    box-shadow:0 6px 20px rgba(0, 59, 113, 0.03);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .sy:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(0, 59, 113, 0.07);
+  }
+  .sy .n{
+    display:inline-block;
+    font-weight:700;
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    color:var(--vumi-blue);
+    background:var(--vumi-sky);
+    padding:4px 10px;
+    border-radius:6px;
+  }
+  .sy h4{
+    font-weight:700;
+    font-size:1.18rem;
+    margin:16px 0 10px;
+    line-height:1.25;
+    color:var(--vumi-navy);
+  }
+  .sy p{
+    color:var(--text-muted);
+    font-size:0.96rem;
+    line-height:1.6;
+  }
+
+  /* ---- A -> B Table ---- */
+  .ab{
+    margin-top:44px;
+    border:1px solid var(--border-card);
+    border-radius:18px;
+    overflow:hidden;
+    background:#FFFFFF;
+    box-shadow:0 10px 30px rgba(0, 59, 113, 0.04);
+  }
+  .ab-head{
+    display:grid;
+    grid-template-columns:1fr 54px 1fr;
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    background:var(--bg-soft);
+    border-bottom:1px solid var(--border-card);
+  }
+  .ab-head div{
+    padding:18px 24px;
+  }
+  .ab-head .a{
+    color:var(--text-light);
+  }
+  .ab-head .b{
+    color:var(--vumi-navy);
+  }
+  .ab-row{
+    display:grid;
+    grid-template-columns:1fr 54px 1fr;
+    border-top:1px solid var(--border-light);
+    align-items:center;
+  }
+  .ab-row:first-of-type{
+    border-top:none;
+  }
+  .ab-row>div{
+    padding:20px 24px;
+  }
+  .ab-a{
+    color:var(--text-muted);
+    font-size:0.98rem;
+  }
+  .ab-mid{
+    display:flex;
+    justify-content:center;
+    color:var(--vumi-blue);
+    font-weight:700;
+    font-size:1.1rem;
+  }
+  .ab-b{
+    color:var(--vumi-navy);
+    font-size:1.02rem;
+    font-weight:500;
+    background:rgba(234, 243, 251, 0.4);
+  }
+  .ab-b b{
+    color:var(--vumi-accent);
+    font-weight:700;
+  }
+
+  /* ---- Pillars ---- */
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+    margin-top:42px;
+  }
+  .pill{
+    border:1px solid var(--border-card);
+    border-radius:16px;
+    padding:32px 28px;
+    background:#FFFFFF;
+    box-shadow:0 6px 20px rgba(0, 59, 113, 0.03);
+    transition:transform 0.2s ease;
+  }
+  .pill:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(0, 59, 113, 0.06);
+  }
+  .pill .p-n{
+    font-weight:800;
+    font-size:1.4rem;
+    color:var(--vumi-blue);
+    display:block;
+    margin-bottom:6px;
+  }
+  .pill h4{
+    font-weight:700;
+    font-size:1.22rem;
+    margin:6px 0 10px;
+    color:var(--vumi-navy);
+  }
+  .pill p{
+    color:var(--text-muted);
+    font-size:0.98rem;
+    line-height:1.6;
+  }
+
+  /* ---- Commitment Box ---- */
+  .commit{
+    margin-top:36px;
+    border:1px solid var(--vumi-navy);
+    border-radius:18px;
+    padding:34px 36px;
+    background:linear-gradient(135deg, var(--vumi-navy) 0%, var(--vumi-dark) 100%);
+    color:#FFFFFF;
+    box-shadow:0 12px 32px rgba(0, 59, 113, 0.15);
+  }
+  .commit p{
+    color:#E0ECF8;
+    font-size:1.08rem;
+    max-width:68ch;
+    line-height:1.7;
+  }
+  .commit p b{
+    color:#FFFFFF;
+  }
+
+  /* ---- Why Pau ---- */
+  .why{
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    margin-top:24px;
+  }
+  .why .txt{
+    flex:1;
+    min-width:300px;
+  }
+  .why h2{
+    font-size:clamp(1.8rem,4vw,2.4rem);
+    color:var(--vumi-navy);
+    margin-bottom:16px;
+  }
+  .why p{
+    color:var(--text-muted);
+    font-size:1.05rem;
+    max-width:64ch;
+    line-height:1.7;
+  }
+  .why .creds{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--border-card);
+  }
+  .why .creds div{}
+  .why .creds .num{
+    font-weight:800;
+    font-size:1.8rem;
+    color:var(--vumi-navy);
+  }
+  .why .creds .cl{
+    color:var(--text-light);
+    font-size:0.8rem;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+
+  /* ---- Accordion for 8 Sessions ---- */
+  .accordion-wrap{
+    max-width:920px;
+    margin:40px auto 0;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .session-acc{
+    border:1px solid var(--border-card);
+    border-radius:14px;
+    background:#FFFFFF;
+    box-shadow:0 4px 14px rgba(0, 59, 113, 0.03);
+    overflow:hidden;
+    transition:border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .session-acc:hover{
+    border-color:var(--vumi-sky-border);
+    box-shadow:0 8px 24px rgba(0, 59, 113, 0.06);
+  }
+  .session-acc[open]{
+    border-color:var(--vumi-accent);
+    box-shadow:0 8px 26px rgba(0, 59, 113, 0.07);
+  }
+  .session-acc summary{
+    padding:20px 24px;
+    cursor:pointer;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    user-select:none;
+    background:#FFFFFF;
+    transition:background 0.2s ease;
+  }
+  .session-acc summary::-webkit-details-marker{
+    display:none;
+  }
+  .session-acc summary:hover{
+    background:var(--bg-soft);
+  }
+  .session-acc[open] summary{
+    background:var(--vumi-sky);
+    border-bottom:1px solid var(--border-card);
+  }
+  .session-summary-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    text-align:left;
+  }
+  .session-pill{
+    font-size:0.75rem;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--vumi-navy);
+    background:#FFFFFF;
+    border:1px solid var(--vumi-sky-border);
+    padding:4px 10px;
+    border-radius:50px;
+    white-space:nowrap;
+  }
+  .session-title{
+    font-size:1.08rem;
+    font-weight:700;
+    color:var(--vumi-navy);
+  }
+  .session-chevron{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#FFFFFF;
+    border:1px solid var(--border-card);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--vumi-navy);
+    font-weight:700;
+    font-size:0.9rem;
+    transition:transform 0.2s ease;
+    flex-shrink:0;
+  }
+  .session-acc[open] .session-chevron{
+    transform:rotate(180deg);
+    background:var(--vumi-navy);
+    color:#FFFFFF;
+    border-color:var(--vumi-navy);
+  }
+  .session-content{
+    padding:22px 24px;
+    font-size:0.98rem;
+    color:var(--text-muted);
+    line-height:1.7;
+    background:#FFFFFF;
+  }
+
+  /* ---- Pricing / Investment Section ---- */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px;
+    margin-top:46px;
+    max-width:920px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .price-card{
+    border:1px solid var(--border-card);
+    border-radius:20px;
+    background:#FFFFFF;
+    padding:38px 32px;
+    box-shadow:0 8px 26px rgba(0, 59, 113, 0.04);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .price-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 36px rgba(0, 59, 113, 0.08);
+  }
+  .price-card.featured{
+    border:2px solid var(--vumi-accent);
+    background:linear-gradient(180deg, #FFFFFF 0%, var(--vumi-sky) 100%);
+  }
+  .price-badge{
+    position:absolute;
+    top:-14px;
+    right:28px;
+    background:var(--vumi-navy);
+    color:#FFFFFF;
+    font-size:0.75rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 14px;
+    border-radius:50px;
+    box-shadow:0 4px 10px rgba(0, 59, 113, 0.2);
+  }
+  .price-header{
+    margin-bottom:20px;
+    border-bottom:1px solid var(--border-card);
+    padding-bottom:20px;
+  }
+  .price-title{
+    font-size:1.35rem;
+    font-weight:800;
+    color:var(--vumi-navy);
+    margin-bottom:6px;
+  }
+  .price-desc{
+    font-size:0.92rem;
+    color:var(--text-muted);
+  }
+  .price-amount{
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    margin:18px 0 10px;
+  }
+  .price-amount .num{
+    font-size:2.6rem;
+    font-weight:800;
+    color:var(--vumi-navy);
+    line-height:1;
+  }
+  .price-amount .currency{
+    font-size:1.1rem;
+    font-weight:700;
+    color:var(--text-muted);
+  }
+  .price-features{
+    list-style:none;
+    margin:20px 0 28px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex-grow:1;
+  }
+  .price-features li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:0.95rem;
+    color:var(--text-main);
+    line-height:1.45;
+  }
+  .price-features li::before{
+    content:"✓";
+    color:var(--vumi-blue);
+    font-weight:800;
+    font-size:1.05rem;
+    line-height:1.2;
+  }
+  .price-duration-box{
+    background:#FFFFFF;
+    border:1px solid var(--vumi-sky-border);
+    border-radius:12px;
+    padding:12px 16px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:0.9rem;
+    color:var(--vumi-navy);
+    font-weight:600;
+  }
+
+  /* ---- Close / CTA ---- */
+  .close{
+    padding:90px 0 100px;
+    text-align:center;
+    background:linear-gradient(180deg, #F5F9FD 0%, #FFFFFF 100%);
+    border-top:1px solid var(--border-card);
+    position:relative;
+  }
+  .close h2{
+    font-size:clamp(2rem,5vw,3.2rem);
+    max-width:20ch;
+    margin:18px auto 0;
+    color:var(--vumi-navy);
+  }
+  .next{
+    margin-top:40px;
+    display:inline-flex;
+    flex-direction:column;
+    gap:8px;
+    border:1px solid var(--vumi-sky-border);
+    border-radius:18px;
+    padding:30px 44px;
+    background:#FFFFFF;
+    box-shadow:0 12px 36px rgba(0, 59, 113, 0.06);
+    max-width:540px;
+  }
+  .next .step{
+    font-weight:800;
+    font-size:1.22rem;
+    color:var(--vumi-navy);
+  }
+  .next .det{
+    color:var(--text-muted);
+    font-size:0.96rem;
+    line-height:1.5;
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    border-top:1px solid var(--border-light);
+    padding:34px 0;
+    background:#FFFFFF;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    color:var(--text-light);
+    font-size:0.88rem;
+    font-weight:500;
+  }
+  footer .author{
+    color:var(--vumi-navy);
+    font-weight:700;
+  }
+
+  /* ---- Responsive ---- */
+  @media(max-width:860px){
+    .sympt{grid-template-columns:1fr}
+    .pricing-grid{grid-template-columns:1fr}
+    .pillars{grid-template-columns:1fr}
+    .section{padding:64px 0}
+    .ab-head,.ab-row{grid-template-columns:1fr 36px 1fr}
+    .ab-head div,.ab-row>div{padding:14px 14px}
+    .ab-a,.ab-b{font-size:0.92rem}
+    .site-header .wrap{flex-direction:column;gap:12px;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE NAVBAR -->
+<nav class="site-header">
+  <div class="wrap">
+    <div class="logo-area">
+      <div class="vumi-logo">VUMI<sup>®</sup></div>
+      <div class="collab-tag">Plan con <b>Pau Martí</b></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <a href="#programa" style="color:var(--text-muted);text-decoration:none;font-weight:600;font-size:0.88rem;padding:6px 12px">Temario (8 Sesiones)</a>
+      <a href="#inversion" class="btn-vumi">Ver Inversión y Formatos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <span class="badge"><b>Propuesta Estratégica</b> · Innovación en Redes</span>
+    <h1 class="display">Salváis vidas todos los días.<br>Hagamos que en vuestro Instagram<br><span class="grad">se sienta esa misma vocación.</span></h1>
+    <p class="lede">Tenéis una labor extraordinaria: cuidar la salud de miles de familias y brindarles tranquilidad en los momentos clave. Esta propuesta es un plan práctico para que vuestras redes sociales conecten de forma cercana, humana y dinámica con toda vuestra comunidad.</p>
+
+    <div class="ekg">
+      <svg viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="pg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#003B71"/>
+            <stop offset="50%" stop-color="#2A6EC2"/>
+            <stop offset="100%" stop-color="#00A3C4"/>
+          </linearGradient>
+        </defs>
+        <path class="flat" d="M0,45 L1000,45"/>
+        <path class="pulse" d="M0,45 L360,45 L390,45 L410,12 L435,78 L460,26 L482,45 L560,45 L590,45 L612,18 L640,70 L666,45 L1000,45"/>
+      </svg>
+      <div class="ekg-caption">
+        <span>Hoy: Comunicación institucional</span>
+        <span>Con el plan: Comunidad activa y conectada</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM / STARTING POINT -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">El punto de partida</span>
+    <h2 class="display kicker-h">Tenéis una gran marca con una comunidad lista para activarse.</h2>
+    <p class="lede">Vuestro equipo cuida la presencia institucional con rigor y coherencia visual. Hoy en día, el entorno digital ofrece la gran oportunidad de ir un paso más allá: humanizar los mensajes para que los asegurados sientan a VUMI como un aliado cercano en su día a día.</p>
+
+    <div class="stat">
+      <span class="big">20.300+</span>
+      <span class="lbl">seguidores que ya confían en la marca y representan una <b>gran base de valor</b>.</span>
+      <span class="punch">Con la estrategia adecuada, esta audiencia puede transformarse en una <b>comunidad viva</b> que interactúa, comparte experiencias y recomienda vuestros servicios de forma espontánea.</span>
+    </div>
+
+    <!-- EMPOWER DESIGNERS CARD -->
+    <div class="empower-card">
+      <span class="empower-badge">El verdadero impacto</span>
+      <h3>Liberar el potencial y la ambición de vuestro equipo</h3>
+      <p>Este curso no es solo una formación técnica en Inteligencia Artificial. Su verdadero propósito es que <b>los diseñadores liberen todo su potencial creativo:</b> que dejen de ser simples ejecutores de encargos y empiecen a <b>pensar por sí mismos, a generar ideas propias y audaces, a perder el miedo a proponer y a ser mucho más ambiciosos</b> con el impacto de su trabajo en VUMI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITIES -->
+<section class="section soft-bg">
+  <div class="wrap">
+    <span class="eyebrow">Las 3 oportunidades clave</span>
+    <h2 class="display kicker-h">Pequeños enfoques que multiplican el impacto.</h2>
+    <p class="lede">El equipo creativo cuenta con un sólido talento técnico. Con una dirección estratégica renovada y herramientas de Inteligencia Artificial, podemos potenciar su trabajo en tres áreas principales:</p>
+
+    <div class="sympt">
+      <div class="sy">
+        <span class="n">OPORTUNIDAD 1</span>
+        <h4>Contenido exclusivo por idioma</h4>
+        <p>Dar a cada publicación en español y en inglés un enfoque y creatividad propios, adaptados a la cultura e intereses de cada segmento de asegurados.</p>
+      </div>
+      <div class="sy">
+        <span class="n">OPORTUNIDAD 2</span>
+        <h4>Poner a las personas en el centro</h4>
+        <p>Complementar los hitos corporativos con historias humanas de tranquilidad, consejos preventivos de salud y el respaldo real que reciben las familias.</p>
+      </div>
+      <div class="sy">
+        <span class="n">OPORTUNIDAD 3</span>
+        <h4>Formatos visuales dinámicos</h4>
+        <p>Incorporar vídeos breves, infografías ágiles y narrativas visuales pensadas específicamente para captar la atención de forma inmediata en el teléfono móvil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- A -> B -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">La transformación</span>
+    <h2 class="display kicker-h">Evolución de la comunicación digital.</h2>
+    <p class="lede">Un salto de calidad que combina cercanía humana y tecnología de Inteligencia Artificial para multiplicar la capacidad creativa de vuestro equipo.</p>
+
+    <div class="ab">
+      <div class="ab-head">
+        <div class="a">Enfoque actual</div>
+        <div class="mid"></div>
+        <div class="b">El siguiente nivel</div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Publicaciones idénticas en dos idiomas</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">Ideas originales <b>personalizadas para cada audiencia</b></div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Diseños estáticos institucionales</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">Vídeos y contenidos que <b>generan interés inmediato</b></div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Comunicaciones centradas en la empresa</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">Historias reales de <b>protección y cuidado familiar</b></div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Interacción puntual o reservada</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">Comunidad activa que <b>comenta, agradece y comparte</b></div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Procesos tradicionales de producción</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">Equipo creativo <b>ágil, motivado y pensando por sí mismo</b></div>
+      </div>
+      <div class="ab-row">
+        <div class="ab-a">Presencia formal en el sector</div>
+        <div class="ab-mid">→</div>
+        <div class="ab-b">El referente de salud <b>más humano, innovador y querido</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section soft-bg">
+  <div class="wrap">
+    <span class="eyebrow">Metodología de trabajo</span>
+    <h2 class="display kicker-h">Capacitación práctica orientada a resultados reales.</h2>
+    <p class="lede">No se trata solo de enseñar software, sino de acompañar a vuestro equipo a desarrollar una mentalidad ágil y creativa:</p>
+
+    <div class="pillars">
+      <div class="pill">
+        <span class="p-n">01</span>
+        <h4>Confianza e iniciativa creativa</h4>
+        <p>Impulsar al equipo para que proponga conceptos frescos que transmitan empatía y conecten de forma auténtica con el público.</p>
+      </div>
+      <div class="pill">
+        <span class="p-n">02</span>
+        <h4>Inteligencia Artificial como acelerador</h4>
+        <p>Aprender a utilizar herramientas avanzadas para crear conceptos visuales y audiovisuales de alto nivel en una fracción del tiempo habitual.</p>
+      </div>
+      <div class="pill">
+        <span class="p-n">03</span>
+        <h4>Trabajo real desde el primer día</h4>
+        <p>Todo el aprendizaje se realiza sobre casos y piezas reales de VUMI, dejando una batería de contenidos lista y aprobada para publicación.</p>
+      </div>
+      <div class="pill">
+        <span class="p-n">04</span>
+        <h4>Conexión con personas y familias</h4>
+        <p>Lograr que cada usuario que interactúe con VUMI perciba la excelencia médica y la cercanía humana que os distinguen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">Visión compartida</span>
+    <h2 class="display kicker-h">Un trabajo en equipo con liderazgo.</h2>
+    <div class="commit">
+      <p>El éxito de esta transformación se apoya en dos pilares: <b>la capacitación dotará a vuestro equipo de nuevas habilidades creativas con IA, y el respaldo de la dirección les dará la confianza para implementar estas ideas frescas.</b> Cuando el talento creativo y la visión directiva avanzan de la mano, la marca consolida un liderazgo digital moderno y duradero.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY PAU -->
+<section class="section soft-bg">
+  <div class="wrap">
+    <span class="eyebrow">Por qué Pau Martí</span>
+    <div class="why">
+      <div class="txt">
+        <h2 class="display">Un facilitador práctico para vuestro equipo.</h2>
+        <p>Cuento con más de 6 años de experiencia aplicando y formando en Inteligencia Artificial en entornos corporativos y creativos. Mi enfoque es 100% práctico y colaborativo: facilitar que vuestro propio equipo gane la autonomía y destreza necesarias para mantener esta calidad en el tiempo.</p>
+        <div class="creds">
+          <div>
+            <div class="num">+6</div>
+            <div class="cl">AÑOS EN IA APLICADA</div>
+          </div>
+          <div>
+            <div class="num">Práctico</div>
+            <div class="cl">METODOLOGÍA DIRECTA</div>
+          </div>
+          <div>
+            <div class="num">100% Real</div>
+            <div class="cl">PRODUCCIÓN APLICADA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 SESSIONS DESPLEGABLE / ACCORDION -->
+<section class="section" id="programa">
+  <div class="wrap">
+    <div style="text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow">Temario Detallado</span>
+      <h2 class="display kicker-h" style="margin-left:auto;margin-right:auto">Las 8 sesiones del programa.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto">Haz clic en cada sesión para desplegar el contenido y los objetivos prácticos de cada bloque (8 sesiones de 1:30h · 12 horas en total):</p>
+    </div>
+
+    <div class="accordion-wrap">
+      <!-- Session 1 -->
+      <details class="session-acc" open>
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 01 · 1:30h</span>
+            <span class="session-title">Por qué ese vídeo del perro paró al mundo y el vuestro no.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Empezamos viendo el vídeo que os enamoró y destripando, en fácil, qué lo hace funcionar. Aprendemos a mirar vídeos con ojos nuevos: por qué unos te paran el dedo y otros los saltas sin pensar. Salís sabiendo distinguir un vídeo que engancha de uno que se salta — el primer paso para dejar de hacer los segundos.
+        </div>
+      </details>
+
+      <!-- Session 2 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 02 · 1:30h</span>
+            <span class="session-title">La idea valiente antes que la herramienta.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          El vídeo del perro no es un truco de máquina, es una idea con descaro. Aquí aprendemos a inventar esas ideas para VUMI: pasar de la primera ocurrencia obvia, la de siempre, a la que hace que alguien pare y diga "¿pero esto qué es?". Sin una buena idea, la mejor herramienta del mundo solo hace folletos más caros.
+        </div>
+      </details>
+
+      <!-- Session 3 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 03 · 1:30h</span>
+            <span class="session-title">De la foto al movimiento.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Ya sabéis crear imágenes; ahora les damos vida. Coger una imagen quieta y convertirla en un vídeo que se mueve, con cámara y con ritmo. Es el puente entre lo que ya domináis y lo que os falta, y vuestra primera pieza en movimiento.
+        </div>
+      </details>
+
+      <!-- Session 4 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 04 · 1:30h</span>
+            <span class="session-title">El gancho de los tres segundos.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Si los tres primeros segundos no atrapan, da igual lo bueno que sea el resto: la persona ya se fue. Aprendemos a bordar ese arranque, a meter algo inesperado en el primer segundo — como el perro que se come las letras del perfil.
+        </div>
+      </details>
+
+      <!-- Session 5 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 05 · 1:30h</span>
+            <span class="session-title">El oficio del vídeo: que no parezca IA barata.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Aquí está la chicha: mover la cámara, encadenar planos, alargar tomas, que todo quede fino y no "cante" a inteligencia artificial. La diferencia entre un vídeo que impresiona y uno que da vergüenza ajena está justo en estos detalles.
+        </div>
+      </details>
+
+      <!-- Session 6 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 06 · 1:30h</span>
+            <span class="session-title">Que la marca hable sin grabar a nadie.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Sé que no queréis salir en cámara — pues no hace falta. Aprendemos a crear un portavoz de VUMI que habla, presenta y cuenta, sin poner a nadie a grabarse. Un formato nuevo entero que hoy no estáis usando.
+        </div>
+      </details>
+
+      <!-- Session 7 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 07 · 1:30h</span>
+            <span class="session-title">Muchos vídeos, rápido y en dos idiomas.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          El vídeo lleva tiempo, y encima ahora lo publicáis todo dos veces, en español e inglés. Aprendemos a producir en cadena: sacar varias piezas en el tiempo que antes costaba una, y resolver los dos idiomas sin duplicar el trabajo. Se acabó el feed repetido.
+        </div>
+      </details>
+
+      <!-- Session 8 -->
+      <details class="session-acc">
+        <summary>
+          <div class="session-summary-left">
+            <span class="session-pill">Sesión 08 · 1:30h</span>
+            <span class="session-title">Vuestro nuevo feed y cómo seguir solos.</span>
+          </div>
+          <span class="session-chevron">▼</span>
+        </summary>
+        <div class="session-content">
+          Montamos juntos una tanda de vídeos de VUMI lista para publicar y os dejamos el sistema para repetirlo sin depender de nadie. Cerramos donde empezamos: en la sesión 1 vimos el vídeo del perro; hoy hacéis el vuestro.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / FORMATS SECTION -->
+<section class="section soft-bg" id="inversion">
+  <div class="wrap">
+    <div style="text-align:center;max-width:680px;margin:0 auto">
+      <span class="eyebrow">Inversión y Formatos</span>
+      <h2 class="display kicker-h" style="margin-left:auto;margin-right:auto">Opciones adaptadas a vuestro equipo.</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto">El programa completo incluye <b>8 sesiones de 1:30 horas (12 horas en total)</b> de formación práctica intensiva y creación de piezas reales para VUMI.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Opción Presencial -->
+      <div class="price-card featured">
+        <span class="price-badge">Presencial · En vuestra sede</span>
+        <div class="price-header">
+          <div class="price-title">Formato Presencial</div>
+          <div class="price-desc">Formación directa mano a mano con vuestro equipo en vuestras oficinas.</div>
+          <div class="price-amount">
+            <span class="num">$3.400</span>
+            <span class="currency">USD</span>
+          </div>
+        </div>
+
+        <div class="price-duration-box">
+          <span>⏱ <b>8 sesiones de 1:30h</b> (12 horas de formación)</span>
+        </div>
+
+        <ul class="price-features">
+          <li><b>Incluye viaje y desplazamiento</b> de Pau Martí desde Paraguay.</li>
+          <li>Formación presencial directa con los diseñadores y creativos.</li>
+          <li>Producción de contenidos reales de VUMI en directo.</li>
+          <li>Revisión, feedback y pulido de piezas en tiempo real.</li>
+          <li>Flujos de trabajo y prompts de IA personalizados para VUMI.</li>
+          <li>Soporte y resolución de dudas posterior a la formación.</li>
+        </ul>
+
+        <a href="#contacto" class="btn-vumi" style="width:100%;padding:14px;font-size:0.95rem;">Elegir Formato Presencial</a>
+      </div>
+
+      <!-- Opción Online -->
+      <div class="price-card">
+        <div class="price-header">
+          <div class="price-title">Formato 100% Online</div>
+          <div class="price-desc">Sesiones en vivo por videollamada interactiva con máxima flexibilidad.</div>
+          <div class="price-amount">
+            <span class="num">$2.900</span>
+            <span class="currency">USD</span>
+          </div>
+        </div>
+
+        <div class="price-duration-box">
+          <span>⏱ <b>8 sesiones de 1:30h</b> (12 horas de formación)</span>
+        </div>
+
+        <ul class="price-features">
+          <li>8 sesiones en directo por videollamada interactiva.</li>
+          <li>Grabación completa de cada sesión en alta definición.</li>
+          <li>Producción de contenidos reales de VUMI paso a paso.</li>
+          <li>Flujos de trabajo y prompts de IA personalizados para VUMI.</li>
+          <li>Revisión y feedback entre sesiones.</li>
+          <li>Soporte y resolución de dudas posterior a la formación.</li>
+        </ul>
+
+        <a href="#contacto" class="btn-vumi" style="width:100%;padding:14px;font-size:0.95rem;background:var(--vumi-navy);">Elegir Formato Online</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">El siguiente paso</span>
+    <h2 class="display">VUMI ya es líder en salud internacional.<br>Hagamos que en redes sociales <span class="grad">brille con la misma excelencia.</span></h2>
+    <div class="next">
+      <span class="step">Sesión de alcance · 45 minutos</span>
+      <span class="det">Analizamos las necesidades de vuestro equipo, resolvemos cualquier duda y dejamos cerrado el calendario de trabajo.</span>
+      <div style="margin-top:14px">
+        <a href="mailto:hola@paumarti.com" class="btn-vumi" style="width:100%;padding:14px 28px;font-size:1rem;">Agendar llamada ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="author">Pau Martí × VUMI®</div>
+    <div>Propuesta estratégica de comunicación e Inteligencia Artificial</div>
+  </div>
+</footer>
+
+</body>
+</html>
