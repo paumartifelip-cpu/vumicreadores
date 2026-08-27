@@ -496,14 +496,29 @@
   /* ---- Why Pau ---- */
   .why{
     display:flex;
-    gap:36px;
+    gap:44px;
     flex-wrap:wrap;
-    align-items:flex-start;
-    margin-top:24px;
+    align-items:center;
+    margin-top:28px;
   }
   .why .txt{
     flex:1;
-    min-width:300px;
+    min-width:320px;
+  }
+  .why-photo-wrap{
+    width:280px;
+    flex-shrink:0;
+  }
+  .why-photo{
+    width:100%;
+    height:360px;
+    object-fit:cover;
+    object-position:center top;
+    border-radius:20px;
+    box-shadow:0 16px 36px rgba(0, 59, 113, 0.12);
+    border:3px solid #FFFFFF;
+    outline:1px solid var(--border-card);
+    display:block;
   }
   .why h2{
     font-size:clamp(1.8rem,4vw,2.4rem);
@@ -1008,6 +1023,9 @@
   <div class="wrap">
     <span class="eyebrow">Por qué Pau Martí</span>
     <div class="why">
+      <div class="why-photo-wrap">
+        <img src="FullSizeRender.jpg" alt="Pau Martí" class="why-photo">
+      </div>
       <div class="txt">
         <h2 class="display">Un facilitador práctico para vuestro equipo.</h2>
         <p>Cuento con más de 6 años de experiencia aplicando y formando en Inteligencia Artificial en entornos corporativos y de comunicación. Mi enfoque es 100% práctico y colaborativo: facilitar que vuestro propio equipo gane la autonomía y destreza necesarias para mantener esta calidad en el tiempo.</p>
