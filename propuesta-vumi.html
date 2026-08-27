@@ -97,6 +97,12 @@
     align-items:center;
     gap:16px;
   }
+  .vumi-logo-img{
+    height:36px;
+    width:auto;
+    object-fit:contain;
+    display:block;
+  }
   .vumi-logo{
     font-size:1.85rem;
     font-weight:900;
@@ -841,7 +847,7 @@
 <nav class="site-header">
   <div class="wrap">
     <div class="logo-area">
-      <div class="vumi-logo">VUMI<sup>®</sup></div>
+      <img src="images.png" alt="VUMI®" class="vumi-logo-img">
       <div class="collab-tag">Plan con <b>Pau Martí</b></div>
     </div>
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
@@ -1257,8 +1263,12 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <div class="author">Pau Martí × VUMI®</div>
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+    <div class="author" style="display:flex;align-items:center;gap:10px;">
+      <span>Pau Martí</span>
+      <span style="color:var(--text-light)">×</span>
+      <img src="images.png" alt="VUMI®" style="height:24px;width:auto;vertical-align:middle;">
+    </div>
     <div>Propuesta estratégica de comunicación e Inteligencia Artificial</div>
   </div>
 </footer>
